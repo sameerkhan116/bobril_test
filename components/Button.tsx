@@ -1,18 +1,24 @@
 import * as b from 'bobril';
-import { IButtonData } from './button';
 
 export interface IButtonData {
   title: string;
   onClick?: () => void;
+  bold?: boolean;
 }
 
 interface IButtonCtx extends b.IBobrilCtx {
   data: IButtonData;
 }
 
-const button = b.createComponent({
+const bold = b.styleDef({
+  fontWeight: 'bold',
+});
+
+const Button = b.createVirtualComponent<IButtonData>({
+  id: 'button',
   render(ctx: IButtonCtx, me: b.IBobrilNode) {
     me.tag = 'button';
+    b.style(me, ctx.data.bold && bold);
     me.children = ctx.data.title;
   },
   onClick(ctx: IButtonCtx): boolean {
@@ -24,4 +30,4 @@ const button = b.createComponent({
   },
 });
 
-export default button;
+export default Button;
