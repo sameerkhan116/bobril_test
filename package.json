@@ -1,0 +1,16 @@
+{
+  "name": "bobril",
+  "version": "1.0.0",
+  "description": "Learning Bobril",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "M. Sameer Khan",
+  "license": "ISC",
+  "dependencies": {
+    "bobril": "^8.15.0"
+  },
+  "devDependencies": {},
+  "keywords": []
+}
