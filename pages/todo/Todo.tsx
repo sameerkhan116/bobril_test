@@ -9,8 +9,8 @@ const Todo = b.createVirtualComponent({
     me.children = (
       <div>
         <h2>TODO</h2>
-        <List />
         <Form />
+        <List />
       </div>
     );
   },

@@ -1,7 +1,6 @@
 import * as b from 'bobril';
+import * as bs from 'bobrilstrap';
 
-import Checkbox from '../../components/Checkbox';
-import Button from '../../components/Button';
 import { todoStore } from './store.';
 
 const listItemStyle = {
@@ -15,18 +14,29 @@ const List = b.createVirtualComponent({
   id: 'list',
   render(ctx: b.IBobrilCtx, me: b.IBobrilNode) {
     me.children = (
-      <div>
-        {todoStore.items.map((item, index) => (
-          <p>
-            <Checkbox
-              value={item.completed}
-              onChange={completed => todoStore.setCompleted(index, completed)}
-            />
-            <div style={listItemStyle}>{item.title}</div>
-            <Button title="REMOVE" onClick={() => todoStore.remove(index)} />
-          </p>
-        ))}
-      </div>
+      <bs.Table>
+        <bs.TBody>
+          {todoStore.items.map((item, index) => (
+            <bs.Tr>
+              <bs.Td style={bs.typography.textLeft}>
+                <bs.InputCheckbox
+                  checked={item.completed}
+                  onChange={completed =>
+                    todoStore.setCompleted(index, completed)
+                  }
+                />
+              </bs.Td>
+              <bs.Td>{item.title}</bs.Td>
+              <bs.Td style={bs.typography.textRight}>
+                <bs.Button
+                  label="REMOVE"
+                  onClick={() => todoStore.remove(index)}
+                />
+              </bs.Td>
+            </bs.Tr>
+          ))}
+        </bs.TBody>
+      </bs.Table>
     );
   },
 });
