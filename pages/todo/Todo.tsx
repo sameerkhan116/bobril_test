@@ -2,10 +2,27 @@ import * as b from 'bobril';
 
 import List from './List';
 import Form from './Form';
+import { todoStore } from './store.';
 
-const Todo = b.createVirtualComponent({
+interface ITodoData {
+  routeParams: {
+    item?: string;
+  };
+}
+
+interface ITodoCtx extends b.IBobrilCtx {
+  data: ITodoData;
+}
+
+const Todo = b.createVirtualComponent<ITodoData>({
   id: 'todo',
-  render(ctx: b.IBobrilCtx, me: b.IBobrilNode) {
+  init(ctx: ITodoCtx) {
+    if (ctx.data.routeParams.item) {
+      todoStore.currentValue = ctx.data.routeParams.item;
+      todoStore.add();
+    }
+  },
+  render(ctx: ITodoCtx, me: b.IBobrilNode) {
     me.children = (
       <div>
         <h2>TODO</h2>

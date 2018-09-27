@@ -1,6 +1,7 @@
 import * as b from 'bobril';
 import * as bs from 'bobrilstrap';
 
+import * as routes from '../routes';
 import Todo from './todo/Todo';
 
 const Main = b.createVirtualComponent({
@@ -13,11 +14,19 @@ const Main = b.createVirtualComponent({
             <bs.NavbarHeader>
               <bs.NavbarBrand>Bobril</bs.NavbarBrand>
             </bs.NavbarHeader>
+            <bs.NavbarNav>
+              <bs.NavbarNavItem active={b.isActive(routes.todo.name)}>
+                {b.link(<a>Todo</a>, routes.todo.name)}
+              </bs.NavbarNavItem>
+              <bs.NavbarNavItem active={b.isActive(routes.about.name)}>
+                {b.link(<a>About</a>, routes.about.name)}
+              </bs.NavbarNavItem>
+            </bs.NavbarNav>
           </bs.Container>
         </bs.Navbar>
         <bs.Main>
           <bs.Container style={bs.typography.textCenter}>
-            <Todo />
+            {me.data.activeRouteHandler()}
           </bs.Container>
         </bs.Main>
       </bs.Container>
